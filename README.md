@@ -1,9 +1,6 @@
 # PyDelta
 
-## Important note
-This project will soon be achived. The original pypi package will soon be deleted but the repository will stay up as a public achive. Why? I made this project for fun a while ago and i just lost intrest in it, but non-related projects will come out soon. A big thanks to everyone that has contributed. 
-
-PyDelta is a Python obfuscator script designed to obfuscate Python source code, making it more difficult to understand and reverse-engineer. PyDelta obfuscates your scripts with multiple layers of protection making it extremely hard for someone to deobfuscate.
+PyDelta is a Python obfuscator script designed to obfuscate Python source code, making it more difficult to understand and reverse-engineer. PyDelta obfuscates your scripts with multiple layers of protection making it extremely hard for someone to deobfuscate. The original repo has been archived and won't be maintained anymore so for the time being and the forseeable future, I'll continue making updates here. <3
 
 ## Features:
 * Anti-Debugger: Adds anti-debugger code to the source to deter debugging attempts.
@@ -14,7 +11,7 @@ PyDelta is a Python obfuscator script designed to obfuscate Python source code, 
 
 ## Usage:
 PyDelta was intended to run in a browser but it is indeed possible to run it locally.
-Install PyDelta using the following pip command `pip install pydeltaobfuscator`.
+Install PyDelta using the following command `python setup.py install`.
 
 ### Example Usage:
 ```py
@@ -53,7 +50,7 @@ Or you can simply run the `pydelta-obfuscate` command.
 
 ### Notes
 * This version of PyDelta is still in development and some features may not be fully functional.
-* ~~Python's `__annotations__` attribute is broken and will be fixed in future releases.~~ - Support added by therealOri
+* Python's `__annotations__` attribute is broken and will be fixed in future releases.
 * Runtime code is obfuscated by choice which can make maintaining a little tricky, even if those function will likely remain untouched in future releases a module will be used.
 
 ### License
