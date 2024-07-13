@@ -11,7 +11,7 @@ PyDelta is a Python obfuscator script designed to obfuscate Python source code, 
 
 ## Usage:
 PyDelta was intended to run in a browser but it is indeed possible to run it locally.
-Install PyDelta using the following command `python setup.py install`.
+> Install PyDelta locally by using the following command: `pip install .`
 
 ### Example Usage:
 ```py
