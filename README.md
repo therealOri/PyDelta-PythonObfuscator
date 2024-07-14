@@ -1,6 +1,9 @@
 # PyDelta
 
-PyDelta is a Python obfuscator script designed to obfuscate Python source code, making it more difficult to understand and reverse-engineer. PyDelta obfuscates your scripts with multiple layers of protection making it extremely hard for someone to deobfuscate. The original repo has been archived and won't be maintained anymore so for the time being and the forseeable future, I'll continue making updates here. <3
+PyDelta is a Python obfuscator script designed to obfuscate Python source code, making it more difficult to understand and reverse-engineer. PyDelta obfuscates your scripts with multiple layers of protection making it extremely hard for someone to deobfuscate.
+> The original repo has been archived and won't be maintained anymore so for the time being and the forseeable future, I'll continue making updates here. <3
+
+<br>
 
 ## Features:
 * Anti-Debugger: Adds anti-debugger code to the source to deter debugging attempts.
@@ -8,6 +11,8 @@ PyDelta is a Python obfuscator script designed to obfuscate Python source code, 
 * String Encryption: Encrypts strings within the code to prevent easy extraction of sensitive information.
 * Inline Imports: Converts imports to inline imports to reduce readability.
 * Name Refactoring: Refactors variable, function and arguments identifiers to further obfuscate the code.
+
+<br>
 
 ## Usage:
 PyDelta was intended to run in a browser but it is indeed possible to run it locally.
@@ -48,15 +53,22 @@ Or you can simply run the `pydelta-obfuscate` command.
 * str_encryption_amount: Number of times to encrypt strings (default: 3).
 * compress_encrypt_amount: Number of times to compress and encrypt the code (default: 30).
 
+<br>
+
 ### Notes
 * This version of PyDelta is still in development and some features may not be fully functional.
-* Python's `__annotations__` attribute is broken and will be fixed in future releases.
 * Runtime code is obfuscated by choice which can make maintaining a little tricky, even if those function will likely remain untouched in future releases a module will be used.
 
 ### License
 This project is licensed under the MIT License.
 
-### Donating
-MetaMask wallet address: `0x1E5a982BD1E54d3CD4EcD7A74642ed808783D506`
+<br>
+<br>
+<br>
 
-<a href='https://ko-fi.com/D1D3NTABI' target='_blank'><img height='36' style='border:0px;height:36px;' src='https://storage.ko-fi.com/cdn/kofi2.png?v=3' border='0' alt='Buy Me a Coffee at ko-fi.com' /></a>
+
+### Support  |  Buy me a coffee <3
+Donate to me here:
+> - Don't have Cashapp? [Sign Up](https://cash.app/app/TKWGCRT)
+
+![image](https://user-images.githubusercontent.com/45724082/158000721-33c00c3e-68bb-4ee3-a2ae-aefa549cfb33.png)
