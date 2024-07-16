@@ -1,7 +1,5 @@
-# Author: WolfHex
-
-# PyDelta v0.1.3 
-# Annotation string references are currently broken
+# Author: WolfHex & therealOri
+# PyDelta v0.1.3
 
 import argparse
 import locale
