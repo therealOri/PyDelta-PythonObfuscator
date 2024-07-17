@@ -9,7 +9,8 @@ setup(
     packages=find_packages(),
     install_requires=[
         'cryptography',
-        'argparse'
+        'argparse',
+        'nuitka'
     ],
     entry_points={
         "console_scripts": [
