@@ -11,6 +11,7 @@ from .code_compressor_and_encryptor import CodeCompressorAndEncryptor
 from .ids_refactor import RefactorNames
 from .import2inlineimport import ImportToInlineImport
 from .string_encryption import StringEncryptor
+from .compiler import CodeCompiler
 
 @dataclass
 class ObfuscationConfig:
@@ -21,6 +22,7 @@ class ObfuscationConfig:
 	compress_encrypt: bool = True
 	str_encryption_amount: int = 3
 	compress_encrypt_amount: int = 30
+	compile_code: bool = False #update this for manual use and not using cli.
 
 def __run_obfuscation(source_code, config: ObfuscationConfig):
 	name_refactor = RefactorNames()
@@ -56,7 +58,6 @@ def __run_obfuscation(source_code, config: ObfuscationConfig):
 
 		if config.refactor_names:
 			source_code = name_refactor.refactor_code(source_code)
-
 	return source_code
 
 def delta_obfuscate(source_code, config: ObfuscationConfig = ObfuscationConfig()):
@@ -78,6 +79,7 @@ def obfuscate_cli():
 	parser.add_argument('--no-encrypt-str', action='store_false', help='Disables encrypting strings.')
 	parser.add_argument('--no-compress-encrypt', action='store_false', help='Disables compression and encryption of the code.')
 	parser.add_argument('--utf-8', action='store_false', help='Use encoding=utf-8 to read input file.')
+	parser.add_argument('--code-compile', type=bool, default=False, help='Uses nuitka to compile the code to an executable.')
 	parser.add_argument('--str-encryption-amount', type=int, default=1, help='Amount of times to encrypt strings.')
 	parser.add_argument('--compress-encrypt-amount', type=int, default=1, help='Amount of times to compress and encrypt the code.')
 
@@ -103,9 +105,23 @@ def obfuscate_cli():
 	)
 
 	obfuscated_code = delta_obfuscate(source_code, config)
+	compile_arg = args.code_compile
 	
 	try:
 		with open(args.output_file, 'w') as outfile:
 			outfile.write(obfuscated_code)
 	except Exception as e:
 		raise Exception(f"Could not write to file: {str(e)}")
+
+
+	try:
+		if compile_arg == True:
+			cmpl = CodeCompiler()
+			cmpl.compile_code(args.output_file)
+		else:
+			pass
+	except Exception as e:
+		raise Exception(f"Nuitka not found/installed or un-able to compile code: {str(e)}")
+
+
+
