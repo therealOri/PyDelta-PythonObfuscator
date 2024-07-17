@@ -1,5 +1,5 @@
 # Author: WolfHex & therealOri
-# PyDelta v0.1.3
+# PyDelta v0.1.4
 
 import argparse
 import locale
