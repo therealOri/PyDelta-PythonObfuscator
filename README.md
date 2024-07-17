@@ -11,6 +11,7 @@ PyDelta is a Python obfuscator script designed to obfuscate Python source code, 
 * String Encryption: Encrypts strings within the code to prevent easy extraction of sensitive information.
 * Inline Imports: Converts imports to inline imports to reduce readability.
 * Name Refactoring: Refactors variable, function and arguments identifiers to further obfuscate the code.
+* Code Compilation: Uses Nuitka to compile code to an executable.
 
 <br>
 
@@ -43,6 +44,8 @@ Or you can simply run the `pydelta-obfuscate` command.
 * compress_encrypt: Whether to compress and encrypt the entire code (default: True).
 * str_encryption_amount: Number of times to encrypt strings (default: 3).
 * compress_encrypt_amount: Number of times to compress and encrypt the code (default: 30).
+* compile_code: Whether to compile your code or not. (default: False).
+
 
 ### CLI Arguments:
 * no_add_anti_dbg
@@ -50,6 +53,7 @@ Or you can simply run the `pydelta-obfuscate` command.
 * no_refactor_names
 * no_encrypt_str
 * no_compress_encrypt
+* code_compile
 * str_encryption_amount: Number of times to encrypt strings (default: 3).
 * compress_encrypt_amount: Number of times to compress and encrypt the code (default: 30).
 
