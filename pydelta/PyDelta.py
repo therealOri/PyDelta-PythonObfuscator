@@ -1,5 +1,5 @@
 # Author: WolfHex & therealOri
-# PyDelta v0.1.4
+# PyDelta v0.1.5
 
 import argparse
 import locale
@@ -23,6 +23,7 @@ class ObfuscationConfig:
 	str_encryption_amount: int = 3
 	compress_encrypt_amount: int = 30
 	compile_code: bool = False #update this for manual use and not using cli.
+	outputfile: str = 'obf_code.py'
 
 def __run_obfuscation(source_code, config: ObfuscationConfig):
 	name_refactor = RefactorNames()
@@ -60,26 +61,45 @@ def __run_obfuscation(source_code, config: ObfuscationConfig):
 			source_code = name_refactor.refactor_code(source_code)
 	return source_code
 
-def delta_obfuscate(source_code, config: ObfuscationConfig = ObfuscationConfig()):
+def obf_code(source_code, config: ObfuscationConfig = ObfuscationConfig()):
 	try:
 		result = __run_obfuscation(source_code, config)
 		return result
 	except Exception as e:
 		raise Exception(f"An error occurred: {str(e)}")
-	
+
+
+def delta_obfuscate(source_code, config: ObfuscationConfig = ObfuscationConfig()):
+	obfuscated_code = obf_code(source_code, config)
+	try:
+		with open(config.outputfile, 'w') as fw:
+			fw.write(obfuscated_code)
+
+		if config.compile_code:
+			cmpl = CodeCompiler()
+			cmpl.compile_code(config.outputfile)
+			return
+		else:
+			return
+	except Exception as e:
+		raise Exception(f"Nuitka not found/installed or un-able to compile code: {str(e)}")
+
+
+
+
 def obfuscate_cli():
 	parser = argparse.ArgumentParser(description='Obfuscate source code with specified configuration.')
 
 	parser.add_argument('input_file', type=str, help='Path to the input source code file.')
 	parser.add_argument('output_file', type=str, help='Path to the output file where obfuscated code will be saved.')
-	
+
 	parser.add_argument('--no-add-anti-dbg', action='store_false', help='Disables add anti-debugging measures.')
 	parser.add_argument('--no-inline-imports', action='store_false', help='Disable inline imports conversion.')
 	parser.add_argument('--no-refactor-names', action='store_false', help='Disables refactoring variable, function and args names.')
 	parser.add_argument('--no-encrypt-str', action='store_false', help='Disables encrypting strings.')
 	parser.add_argument('--no-compress-encrypt', action='store_false', help='Disables compression and encryption of the code.')
 	parser.add_argument('--utf-8', action='store_false', help='Use encoding=utf-8 to read input file.')
-	parser.add_argument('--code-compile', type=bool, default=False, help='Uses nuitka to compile the code to an executable.')
+	parser.add_argument('--code-compile', action=argparse.BooleanOptionalAction, default=False, help='Uses nuitka to compile the code to an executable.')
 	parser.add_argument('--str-encryption-amount', type=int, default=1, help='Amount of times to encrypt strings.')
 	parser.add_argument('--compress-encrypt-amount', type=int, default=1, help='Amount of times to compress and encrypt the code.')
 
@@ -93,7 +113,7 @@ def obfuscate_cli():
 			source_code = infile.read()
 	except Exception as e:
 		raise Exception(f"Could not read input file: {str(e)}")
-	
+
 	config = ObfuscationConfig(
 		add_anti_dbg=args.no_add_anti_dbg,
 		inline_imports=args.no_inline_imports,
@@ -101,27 +121,11 @@ def obfuscate_cli():
 		encrypt_str=args.no_encrypt_str,
 		compress_encrypt=args.no_compress_encrypt,
 		str_encryption_amount=args.str_encryption_amount,
-		compress_encrypt_amount=args.compress_encrypt_amount
+		compress_encrypt_amount=args.compress_encrypt_amount,
+		compile_code=args.code_compile,
+		outputfile=args.output_file
 	)
 
 	obfuscated_code = delta_obfuscate(source_code, config)
-	compile_arg = args.code_compile
-	
-	try:
-		with open(args.output_file, 'w') as outfile:
-			outfile.write(obfuscated_code)
-	except Exception as e:
-		raise Exception(f"Could not write to file: {str(e)}")
-
-
-	try:
-		if compile_arg == True:
-			cmpl = CodeCompiler()
-			cmpl.compile_code(args.output_file)
-		else:
-			pass
-	except Exception as e:
-		raise Exception(f"Nuitka not found/installed or un-able to compile code: {str(e)}")
-
 
 
