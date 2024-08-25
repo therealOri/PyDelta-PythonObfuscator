@@ -8,8 +8,8 @@ class CodeCompiler:
             platform_command = ['cmd.exe', '/c', 'nuitka', '--version']
             system_args = ['cmd.exe', '/c', 'nuitka', '--follow-imports', '--remove-output', file_path]
         else:
-            platform_command = ['nuitka3', '--version']
-            system_args = ['nuitka3', '--follow-imports', '--remove-output', file_path]
+            platform_command = ['nuitka', '--version']
+            system_args = ['nuitka', '--follow-imports', '--remove-output', file_path]
 
         try:
             result_code = subprocess.run(platform_command) #check to see if nuitka is installed.
@@ -20,10 +20,6 @@ class CodeCompiler:
                 input(f'An error has occured while trying to install the nuitka compiler. You can try to install it manually from pypi by using "pip install nuitka" then try to run this code again.\n\nError: {e}\n\nPress "enter" to skip compilation and exit...')
 
         args = system_args
-        try:
-            subprocess.check_call(args)
-        except: #in-case using linux/unix where it's nuitka and not nuitka3'
-            system_args = ['nuitka', '--follow-imports', '--remove-output', file_path]
-            subprocess.check_call(system_args)
+        subprocess.check_call(args)
 
 
