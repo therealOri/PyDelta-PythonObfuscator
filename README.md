@@ -16,21 +16,44 @@ PyDelta is a Python obfuscator script designed to obfuscate Python source code, 
 <br>
 
 ## Usage:
-PyDelta was intended to run in a browser but it is indeed possible to run it locally.
-> Install PyDelta locally by using the following command: `pip install .`
+PyDelta is indeed possible to be installed locally without it being on pypi.
+> Install PyDelta locally by using the following commands:
+```
+git clone https://github.com/therealOri/PyDelta-PythonObfuscator.git
+cd PyDelta-PythonObfuscator/
+virtualenv dvpENV
+source dvpENV/bin/activate  |  (this activation will be different on windows.)
+pip install .
+pip install psutil pycryptodome
+```
 
 ### Example Usage:
 ```py
 from pydelta import delta_obfuscate
+from dataclasses import dataclass # <-- Optional
+
 
 source_code = """
 # Your Python source code here
-print('Hello')
+print('Hello World!')
 """
 
-obfuscated_code = delta_obfuscate(source_code)
-with open('my_obf_file.py', 'w') as file:
-    file.write(obfuscated_code)
+#Default Config
+@dataclass # <-- Optional
+class Config:
+    add_anti_dbg: bool = True
+    inline_imports: bool = True
+    refactor_names: bool = True
+    encrypt_str: bool = True
+    compress_encrypt: bool = True
+    str_encryption_amount: int = 3
+    compress_encrypt_amount: int = 30
+    compile_code: bool = False
+    outputfile: str = 'my_obf_code.py'
+
+
+obfuscated_code = delta_obfuscate(source_code, config=Config())
+
 ```
 
 Or you can simply run the `pydelta-obfuscate` command.
@@ -48,14 +71,15 @@ Or you can simply run the `pydelta-obfuscate` command.
 
 
 ### CLI Arguments:
-* no_add_anti_dbg
-* no_inline_imports
-* no_refactor_names
-* no_encrypt_str
-* no_compress_encrypt
-* code_compile
-* str_encryption_amount: Number of times to encrypt strings (default: 3).
-* compress_encrypt_amount: Number of times to compress and encrypt the code (default: 30).
+* --no-add-anti-dbg
+* --no-inline-imports
+* --no-refactor-names
+* --no-encrypt-str
+* --no-compress-encrypt
+* --code-compile
+* --no-code-compile
+* --str-encryption-amount: Number of times to encrypt strings (default: 3).
+* --compress-encrypt-amount: Number of times to compress and encrypt the code (default: 30).
 
 <br>
 
